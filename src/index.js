@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import axios from "axios";
 import mongoose from "mongoose";
 import { app } from "./app.js";
+import connectDB from "./db/index.js";
 
 const port = 3000;
 
@@ -13,6 +14,12 @@ app.get("/", (req, res) => {
   res.send("This is an CMS Backend!!  ");
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+connectDB()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("Mongodb connection failed", err);
+  });
