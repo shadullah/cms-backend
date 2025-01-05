@@ -1,13 +1,16 @@
-const express = require("express");
-const app = express();
+import dotenv from "dotenv";
+import axios from "axios";
+import mongoose from "mongoose";
+import { app } from "./app.js";
+
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello Wolkdvmsdvlksd mashaallah  sdfskrld!");
+dotenv.config({
+  path: "./.env",
 });
 
-app.get("/cms", (req, res) => {
-  res.send("Hello XMS cMS World !!!");
+app.get("/", (req, res) => {
+  res.send("This is an CMS Backend!!  ");
 });
 
 app.listen(port, () => {
