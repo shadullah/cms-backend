@@ -1,10 +1,6 @@
 import dotenv from "dotenv";
-import axios from "axios";
-import mongoose from "mongoose";
 import { app } from "./app.js";
 import connectDB from "./db/index.js";
-
-const port = 3000;
 
 dotenv.config({
   path: "./.env",
@@ -16,7 +12,7 @@ app.get("/", (req, res) => {
 
 connectDB()
   .then(() => {
-    app.listen(port, () => {
+    app.listen(process.env.PORT || 8000, () => {
       console.log(`Example app listening on port ${process.env.PORT}`);
     });
   })

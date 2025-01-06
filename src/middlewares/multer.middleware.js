@@ -1,4 +1,5 @@
 import multer from "multer";
+import fs from "fs";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -6,7 +7,7 @@ const storage = multer.diskStorage({
       process.env.NODE_ENV === "production" ? "/tmp" : "./public/temp";
 
     if (!fs.existsSync(tempDir)) {
-      fs.mkdisSync(tempDir, { recursive: true });
+      fs.mkdirSync(tempDir, { recursive: true });
     }
     cb(null, tempDir);
   },

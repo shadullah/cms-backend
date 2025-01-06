@@ -21,4 +21,11 @@ app.use(
 );
 app.use(express.static("public"));
 
+// ROUTES IMPORT
+import feedbackRoute from "./routes/feedback.route.js";
+import tagRoute from "./routes/tags.route.js";
+
+app.use("/api/v1/feedback", feedbackRoute);
+app.use("/api/v1/tag", tagRoute);
+
 export { app };

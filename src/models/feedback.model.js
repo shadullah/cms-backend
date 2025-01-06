@@ -10,8 +10,14 @@ const feedbackSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // img,
-    // username
+    name: {
+      type: String,
+      required: true,
+    },
+    imgFeed: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
