@@ -5,10 +5,10 @@ import { Card } from "../models/card.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const createCard = asyncHandler(async (req, res) => {
-  const { title, tag, latest = false } = req.body;
+  const { title, latest, tag } = req.body;
 
-  if (!title || !tag) {
-    throw new ApiError(400, "Title and tag are required");
+  if ([title, tag].some((field) => field?.trim() === "")) {
+    throw new ApiError(400, "All fields are required");
   }
 
   const imgLocalPath = req.files?.img[0]?.path;
@@ -19,14 +19,14 @@ const createCard = asyncHandler(async (req, res) => {
 
   const img = await uploadOnCloudinary(imgLocalPath);
 
-  if (!img.url) {
-    throw new ApiError(400, "Error while uploading image");
+  if (!img) {
+    throw new ApiError(400, "Image upload failed");
   }
 
   const card = await Card.create({
     title,
     img: img.url,
-    latest,
+    latest: latest === "true",
     tag,
   });
 
